@@ -1,8 +1,30 @@
-- name: application installs
-  include: apps.yml 
+- include_vars: secrets.yml
 
-- name: configuration
-  include: configuration.yml
+- include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
 
-- name: dotfiles
-  include: dotfiles.yml
+- include: "{{ item }}"
+  ignore_errors: true
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
+
+#- name: application installs
+#  include: apps.yml 
+
+#- name: configuration
+#  include: configuration.yml
+
+#- name: dotfiles
+#  include: dotfiles.yml
+
+- name: editors
+  include: editors.yml
+
+- name: development
+  include: development.yml
