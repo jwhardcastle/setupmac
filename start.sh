@@ -14,8 +14,6 @@ sudo easy_install ansible
 installdir="/tmp/setupmachine-$RANDOM"
 mkdir $installdir
 
-exit 0
-
 git clone https://github.com/jwhardcastle/setupmachine.git $installdir 
 if [ ! -d $installdir ]; then
     echo "failed to find setupmachine."
@@ -23,7 +21,7 @@ if [ ! -d $installdir ]; then
     exit 1
 else
     cd $installdir 
-    ansible-playbook -i ./hosts playbook.yml --verbose
+    ansible-playbook -Ki ./hosts playbook.yml --verbose
 fi
 
 echo "cleaning up..."
