@@ -1,39 +1,24 @@
 #!/bin/bash
-# script to bootstrap setting up a mac with ansible 
-
-function uninstall {
-
-echo "WARNING : This will remove homebrew and all applications installed through it"
-echo -n "are you sure you want to do that? [y/n] : "
-read confirmation
-
-if [ $confirmation == "y" ]; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
-    exit 0
-else
-  echo "keeping everything intact"
-  exit 0
-fi
-
-}
-
-if [ $1 == "uninstall" ]; then
-    uninstall
-fi
+# script to bootstrap setting up a machine with ansible 
 
 echo "==========================================="
-echo "Setting up your mac using daemonza/setupmac"
+echo "Setting up your machine using jwhardcastle/setupmachine"
 echo "==========================================="
+
+# Ubuntu needs a bunch of libs before installing Ansible
+sudo sh -c "which apt && apt -yf install python-setuptools python-dev libffi-dev libssl-dev"
 
 sudo easy_install pip
 sudo easy_install ansible
 
-installdir="/tmp/setupmac-$RANDOM"
+installdir="/tmp/setupmachine-$RANDOM"
 mkdir $installdir
 
-git clone https://github.com/daemonza/setupmac.git $installdir 
+exit 0
+
+git clone https://github.com/jwhardcastle/setupmachine.git $installdir 
 if [ ! -d $installdir ]; then
-    echo "failed to find setupmac."
+    echo "failed to find setupmachine."
     echo "git cloned failed"
     exit 1
 else
@@ -43,7 +28,7 @@ fi
 
 echo "cleaning up..."
 
-rm -Rfv /tmp/$installdir
+rm -Rfv $installdir
 
 echo "and we are done! Enjoy!"
 
