@@ -1,0 +1,10 @@
+set nocompatible
+
+syntax enable
+colorscheme monokai
+filetype plugin indent on
+
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'chase/vim-ansible-yaml'
+call plug#end()

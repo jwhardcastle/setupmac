@@ -1,0 +1,11 @@
+{
+	"installed_packages":
+	[
+		"Ansible",
+		"Ansible Vault",
+		"ApplySyntax",
+		"CFML",
+		"Package Control",
+		"SublimeLinter-contrib-ansible-lint",
+	]
+}

@@ -1,3 +1,54 @@
 ---
 # install editors
 
+- name: install Sublime Text 3
+  script:
+    src: files/install-sublime.sh
+    creates: /usr/bin/subl
+
+- name: install Package Control
+  get_url:
+    url: https://packagecontrol.io/Package%20Control.sublime-package
+    dest: "{{ general.local_home }}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"
+
+- name: install Package Control settings
+  copy:
+    src: Package Control.sublime-settings
+    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/Package Control.sublime-settings"
+    force: no
+
+- name: install ansible-lint
+  become: true
+  pip:
+    name: ansible-lint
+
+- name: create dotfile directories
+  file:
+    path: "{{ general.local_home }}/{{ item }}"
+    state: directory
+  with_items:
+    - ".fonts"
+    - ".vim/autoload"
+    - .vim/colors
+
+- name: install Anonymous Pro
+  unarchive:
+      src: http://www.marksimonson.com/assets/content/fonts/AnonymousPro-1.002.zip
+      dest: "{{ general.local_home }}/.fonts"
+      remote_src: true
+  ignore_errors: true
+
+- name: setting up vim-plug
+  get_url:
+    url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    dest: "{{general.local_home}}/.vim/autoload/plug.vim"
+  
+- name: install vim-monokai
+  get_url:
+    url: 'https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim'
+    dest: "{{ general.local_home }}/.vim/colors/monokai.vim"
+
+- name: install vimrc
+  copy:
+    src: vimrc
+    dest: "{{ general.local_home }}/.vimrc"
