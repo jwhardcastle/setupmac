@@ -1,23 +1,34 @@
 ---
 # make sure homebrew is installed, update brew and install applications 
 
-- name: application installs
-  include: homebrew.yml
+#- name: application installs
+#  include: homebrew.yml
 
-- name: getting downloads 
-  get_url:
-    url: "{{item.value.url}}"
-    dest: "{{item.value.dest}}"
-  with_dict: "{{downloads}}"    
+#- name: getting downloads 
+#  get_url:
+#    url: "{{item.value.url}}"
+#    dest: "{{item.value.dest}}"
+#  with_dict: "{{downloads}}"    
 
-- name: start installing homebrew applications
-  homebrew:
-    name: "{{item}}"
-    state: latest
-  with_items: "{{applications}}"
+#- name: start installing homebrew applications
+#  homebrew:
+#    name: "{{item}}"
+#    state: latest
+#  with_items: "{{applications}}"
 
-- name: start installing homebrew cask applications
-  homebrew_cask:
-    name: "{{item}}"
-    state: installed 
-  with_items: "{{cask_applications}}"
+#- name: start installing homebrew cask applications
+#  homebrew_cask:
+#    name: "{{item}}"
+#    state: installed 
+#  with_items: "{{cask_applications}}"
+
+- name: see if Google Chrome is installed
+  stat:
+    path: /usr/bin/google-chrome
+  register: googlechrome
+
+- name: install Google Chrome
+  become: true
+  apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  when: googlechrome.stat.exists == false
