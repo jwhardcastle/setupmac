@@ -21,7 +21,7 @@ if [ ! -d $installdir ]; then
     exit 1
 else
     cd $installdir 
-    ansible-playbook -Ki ./hosts playbook.yml --verbose
+    ansible-playbook -Ki ./hosts --ask-vault-pass playbook.yml --verbose
 fi
 
 echo "cleaning up..."

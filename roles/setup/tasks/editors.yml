@@ -1,10 +1,40 @@
 ---
 # install editors
 
-- name: install Sublime Text 3
-  script:
-    src: files/install-sublime.sh
-    creates: /usr/bin/subl
+#- name: "install Sublime Text 3"
+#  script:
+#    src: roles/setup/files/install-sublime.sh
+#    creates: /usr/bin/subl
+- name: determine if Sublime Text is Installed
+  stat:
+    path: /usr/bin/subl
+  register: sublimetext
+
+- name: Install Sublime Text 3 
+  become: true
+  apt:
+    deb: https://download.sublimetext.com/sublime-text_build-3126_amd64.deb
+  when: sublimetext.stat.exists == false
+
+- name: create Sublime config folders
+  file:
+    path: "{{ general.local_home }}/.config/sublime-text-3/{{ item }}"
+    state: directory
+    recurse: yes
+  with_items:
+    - Local
+    - Packages/User
+    - Installed Packages/
+
+- name: install Sublime Text license
+  copy:
+    src: License.sublime_license
+    dest: "{{ general.local_home}}/.config/sublime-text-3/Local/License.sublime_license"
+
+- name: install Sublime Text user settings
+  copy:
+    src: Preferences.sublime-settings
+    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
 
 - name: install Package Control
   get_url:
