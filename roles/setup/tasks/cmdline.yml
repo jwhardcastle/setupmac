@@ -1,8 +1,28 @@
 ---
 # install command line utilities
 
-- name: install {{item}} 
-  homebrew:
-    name: "{{item}}"
-    state: latest
+#- name: install {{item}}
+#  homebrew:
+#    name: "{{item}}"
+#    state: latest
 
+- name: download oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ general.local_home }}/.oh-my-zsh"
+
+- name: copy zshrc
+  copy:
+    src: zshrc
+    dest: "{{ general.local_home }}/.zshrc"
+
+- name: Set zsh as default shell
+  become: true
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+
+- name: install powerline
+  apt:
+    name: powerline
+    state: present
