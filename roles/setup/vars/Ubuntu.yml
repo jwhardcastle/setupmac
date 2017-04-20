@@ -11,3 +11,4 @@ applications:
   - zsh
   - vim
   - mosh
+  - subversion

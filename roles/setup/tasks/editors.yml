@@ -10,7 +10,7 @@
     path: /usr/bin/subl
   register: sublimetext
 
-- name: Install Sublime Text 3 
+- name: Install Sublime Text 3
   become: true
   apt:
     deb: https://download.sublimetext.com/sublime-text_build-3126_amd64.deb
@@ -41,11 +41,15 @@
     url: https://packagecontrol.io/Package%20Control.sublime-package
     dest: "{{ general.local_home }}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"
 
-- name: install Package Control settings
+- name: install Package settings
   copy:
-    src: Package Control.sublime-settings
-    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/Package Control.sublime-settings"
+    src: "{{ item }}"
+    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/"
     force: no
+  with_items:
+    - Package Control.sublime-settings
+    - trailing_spaces.sublime-settings
+    - ApplySyntax.sublime-settings
 
 - name: install ansible-lint
   become: true
@@ -72,7 +76,7 @@
   get_url:
     url: 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     dest: "{{general.local_home}}/.vim/autoload/plug.vim"
-  
+
 - name: install vim-monokai
   get_url:
     url: 'https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim'

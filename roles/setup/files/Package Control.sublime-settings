@@ -6,6 +6,8 @@
 		"ApplySyntax",
 		"CFML",
 		"Package Control",
+		"SublimeLinter",
 		"SublimeLinter-contrib-ansible-lint",
+		"SVN"
 	]
 }
