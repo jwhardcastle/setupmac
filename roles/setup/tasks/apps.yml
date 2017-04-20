@@ -1,14 +1,14 @@
 ---
-# make sure homebrew is installed, update brew and install applications 
+# make sure homebrew is installed, update brew and install applications
 
 #- name: application installs
 #  include: homebrew.yml
 
-#- name: getting downloads 
+#- name: getting downloads
 #  get_url:
 #    url: "{{item.value.url}}"
 #    dest: "{{item.value.dest}}"
-#  with_dict: "{{downloads}}"    
+#  with_dict: "{{downloads}}"
 
 #- name: start installing homebrew applications
 #  homebrew:
@@ -19,7 +19,7 @@
 #- name: start installing homebrew cask applications
 #  homebrew_cask:
 #    name: "{{item}}"
-#    state: installed 
+#    state: installed
 #  with_items: "{{cask_applications}}"
 
 - name: see if Google Chrome is installed

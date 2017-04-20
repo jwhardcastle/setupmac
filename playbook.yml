@@ -1,6 +1,6 @@
 ---
 # setup my machine just the way I like it
 
-- hosts: local 
+- hosts: local
   roles:
     - setup
