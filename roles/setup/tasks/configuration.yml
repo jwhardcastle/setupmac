@@ -1,10 +1,11 @@
 ---
 # doing configuration
 
-- name: setting up zsh with oh-my-zsh
-  git:
-    repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: "{{general.local_home}}/.oh-my-zsh"
+- name: install ssh config
+  copy:
+    src: ssh-config
+    dest: ~/.ssh/config
+    mode: 0600
 
 #- name: getting dracula theme for oh-my-zsh
 #  git:

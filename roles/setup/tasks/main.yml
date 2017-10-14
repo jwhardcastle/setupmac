@@ -22,8 +22,8 @@
 - name: command line
   include: cmdline.yml
 
-#- name: configuration
-#  include: configuration.yml
+- name: configuration
+  include: configuration.yml
 
 #- name: dotfiles
 #  include: dotfiles.yml

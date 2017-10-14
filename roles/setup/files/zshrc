@@ -46,11 +46,9 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn)
+plugins=(git svn ssh-agent)
 
 # User configuration
-
-#export PATH="~/Scripts/:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/texlive/2015/bin:/Applications/ColdFusion11/cfusion/bin/"
 path+=('~/bin')
 path+=('/usr/local/bin')
 path+=('/usr/bin')
@@ -59,6 +57,7 @@ path+=('/usr/sbin')
 path+=('/sbin')
 path+=('/usr/local/texlive/2015/bin')
 path+=('/Applications/ColdFusion11/cfusion/bin')
+path+=('/opt/mssql-tools/bin')
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -116,5 +115,7 @@ build_prompt() {
     prompt_svn
     prompt_end
 }
+
+export EDITOR=vim
 
 export ANSIBLE_CONFIG=~/ansible/ansible.cfg

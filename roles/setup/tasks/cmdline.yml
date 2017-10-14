@@ -26,3 +26,13 @@
   apt:
     name: powerline
     state: present
+
+- name: install ~/bin
+  copy:
+    src: bin
+    dest: "{{ general.local_home }}"
+
+- name: set ~/bin +x
+  command: "chmod -c -R 0770 ~/bin/"
+  register: chmod_status
+  changed_when: chmod_status.stdout != ""
