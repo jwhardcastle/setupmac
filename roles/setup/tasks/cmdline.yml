@@ -23,6 +23,7 @@
     shell: /bin/zsh
 
 - name: install powerline
+  become: true
   apt:
     name: powerline
     state: present
