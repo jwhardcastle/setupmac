@@ -1,14 +1,3 @@
 ---
 # install development tools
 
-- name: determine if GitKraken is Installed
-  stat:
-    path: /usr/bin/gitkraken
-  register: gitkraken
-
-- name: Install GitKraken
-  become: true
-  apt:
-    deb: https://release.gitkraken.com/linux/gitkraken-amd64.deb
-    state: present
-  when: gitkraken.stat.exists == false

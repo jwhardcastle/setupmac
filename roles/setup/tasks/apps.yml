@@ -10,25 +10,25 @@
 #    dest: "{{item.value.dest}}"
 #  with_dict: "{{downloads}}"
 
-#- name: start installing homebrew applications
-#  homebrew:
-#    name: "{{item}}"
-#    state: latest
-#  with_items: "{{applications}}"
 
-#- name: start installing homebrew cask applications
-#  homebrew_cask:
-#    name: "{{item}}"
-#    state: installed
-#  with_items: "{{cask_applications}}"
+# Install ubuntu deb files
+- name: install deb applications
+  include: "filename.yml deb={{item.deb}} name={{item.name}} dest={{item.dest}}"
+  with_dict: "{{ debs }}"
+  loop_control:
+    label: "{{ item.name }}"
 
-- name: see if Google Chrome is installed
-  stat:
-    path: /usr/bin/google-chrome
-  register: googlechrome
+# Install OS X apps
+- name: install homebrew applications
+  homebrew:
+    name: "{{item}}"
+    state: latest
+  with_items: "{{brew_applications}}"
 
-- name: install Google Chrome
+- name: install homebrew cask applications
+  homebrew_cask:
+    name: "{{item}}"
+    state: installed
   become: true
-  apt:
-    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  when: googlechrome.stat.exists == false
+#  ignore_errors: true
+  with_items: "{{cask_applications}}"

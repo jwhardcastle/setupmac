@@ -2,9 +2,11 @@
 # list of applications to install
 general:
   local_home: "{{ lookup('env','HOME') }}"
+  fonts: "{{ lookup('env','HOME') }}/.fonts"
+  sublime_local: "{{ lookup('env','HOME') }}/.config/sublime-text-3"
 
-# homebrew applications
-applications:
+# apt applications
+apt_applications:
   - git
   - curl
   - wget
@@ -12,3 +14,21 @@ applications:
   - vim
   - mosh
   - subversion
+
+debs:
+  chrome:
+    dest: /usr/bin/google-chrome
+    url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    name: Google Chrome
+  sublime:
+    dest: /usr/bin/subl
+    url: https://download.sublimetext.com/sublime-text_build-3126_amd64.deb
+    name: Sublime Text 3
+  gitkraken:
+    dest: /usr/bin/gitkraken
+    url: https://release.gitkraken.com/linux/gitkraken-amd64.deb
+    name: GitKraken
+
+brew_applications: {}
+
+cask_applications: {}

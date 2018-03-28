@@ -2,51 +2,46 @@
 # list of applications to install
 general:
   local_home: "{{ lookup('env','HOME') }}"
+  fonts: "{{ lookup('env','HOME') }}/Library/Fonts"
+  sublime_local: "{{ lookup('env','HOME') }}/Library/Application Support/Sublime Text 3"
 
 # homebrew applications
-applications:
-  - autojump
+brew_applications:
   - git
-  - tree
-  - httpie
   - curl
   - wget
-  - kubectl
-  - kubernetes-helm
   - zsh
-  - go
   - vim
-  - hugo
-  - saltstack
-  - neovim
-  - ag 
-  - ctags
-  - terraform
+#  - tree
+#  - httpie
+#  - kubectl
+#  - kubernetes-helm
+#  - go
+#  - autojump
+#  - hugo
+#  - saltstack
+#  - neovim
+#  - ag 
+#  - ctags
+#  - terraform
 
 # homebrew cask applications
 cask_applications:
   - google-chrome
-  - slack
+#  - virtualbox
+  - sublime-text
   - iterm2
-  - caffeine
-  - docker
-  - minikube
-  - vagrant
-  - emacs
-  - garmin-express
-  - 1password
-  - alfred
-  - virtualbox
-  - spotify
-  - steam
+  - gitkraken
 
-downloads:
-   zwift:
-     name: Zwift
-     url: http://cdn.zwift.com/app/ZwiftOSX.dmg
-     dest: "{{general.local_home}}/Downloads/ZwiftOSX.dmg"
-   suuntolink:
-     name: Suunto Movescount link
-     url: http://suuntolink.static.movescount.com/Suuntolink_installer.dmg
-     dest: "{{general.local_home}}/Downloads/Suuntolink_installer.dmg"
 
+downloads: {}
+#   zwift:
+#     name: Zwift
+#     url: http://cdn.zwift.com/app/ZwiftOSX.dmg
+#     dest: "{{general.local_home}}/Downloads/ZwiftOSX.dmg"
+#   suuntolink:
+#     name: Suunto Movescount link
+#     url: http://suuntolink.static.movescount.com/Suuntolink_installer.dmg
+#     dest: "{{general.local_home}}/Downloads/Suuntolink_installer.dmg"
+
+debs: {}
