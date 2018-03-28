@@ -5,20 +5,10 @@
 #  script:
 #    src: roles/setup/files/install-sublime.sh
 #    creates: /usr/bin/subl
-- name: determine if Sublime Text is Installed
-  stat:
-    path: /usr/bin/subl
-  register: sublimetext
-
-- name: Install Sublime Text 3
-  become: true
-  apt:
-    deb: https://download.sublimetext.com/sublime-text_build-3126_amd64.deb
-  when: sublimetext.stat.exists == false
 
 - name: create Sublime config folders
   file:
-    path: "{{ general.local_home }}/.config/sublime-text-3/{{ item }}"
+    path: "{{ general.sublime_local }}/{{ item }}"
     state: directory
     recurse: yes
   with_items:
@@ -35,17 +25,17 @@
 - name: install Sublime Text user settings
   copy:
     src: Preferences.sublime-settings
-    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings"
+    dest: "{{ general.sublime_local }}/Packages/User/Preferences.sublime-settings"
 
 - name: install Package Control
   get_url:
     url: https://packagecontrol.io/Package%20Control.sublime-package
-    dest: "{{ general.local_home }}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package"
+    dest: "{{ general.sublime_local }}/Installed Packages/Package Control.sublime-package"
 
 - name: install Package settings
   copy:
     src: "{{ item }}"
-    dest: "{{ general.local_home }}/.config/sublime-text-3/Packages/User/"
+    dest: "{{ general.sublime_local }}/Packages/User/"
     force: no
   with_items:
     - Package Control.sublime-settings
@@ -69,7 +59,7 @@
 - name: install Anonymous Pro
   unarchive:
       src: http://www.marksimonson.com/assets/content/fonts/AnonymousPro-1.002.zip
-      dest: "{{ general.local_home }}/.fonts"
+      dest: "{{ general.fonts }}"
       remote_src: true
   ignore_errors: true
 
