@@ -23,10 +23,9 @@
     shell: /bin/zsh
 
 - name: install powerline
-  become: true
-  apt:
-    name: powerline
-    state: present
+  pip:
+    name: powerline-status
+    extra_args: --user
 
 - name: install ~/bin
   copy:
