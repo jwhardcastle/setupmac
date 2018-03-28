@@ -26,10 +26,11 @@
     - Packages/User
     - Installed Packages/
 
-- name: install Sublime Text license
-  copy:
-    src: License.sublime_license
-    dest: "{{ general.local_home}}/.config/sublime-text-3/Local/License.sublime_license"
+# Deprecated: the license file is unique per machine
+#- name: install Sublime Text license
+#  copy:
+#    src: License.sublime_license
+#    dest: "{{ general.sublime_local }}/Local/License.sublime_license"
 
 - name: install Sublime Text user settings
   copy:
