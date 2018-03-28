@@ -7,11 +7,52 @@ echo "==========================================="
 
 ANSIBLE_CONFIG=
 
-# Ubuntu needs a bunch of libs before installing Ansible
-sudo sh -c "which apt && apt -yf install python-setuptools python-dev libffi-dev libssl-dev"
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='osx'
+fi
 
-sudo easy_install pip
-sudo easy_install ansible
+
+if [[ $platform == 'linux' ]]; then
+
+	which apt
+
+	if ! which apt > /dev/null; then
+		echo 'Cannot find apt, exiting.';
+		exit 1
+	fi
+
+	# Ubuntu needs a bunch of libs before installing Ansible
+	sudo sh -c "sudo apt -yf install python-setuptools python-dev libffi-dev libssl-dev"
+
+	sudo easy_install pip
+	sudo easy_install ansible
+
+elif [[ $platform == 'osx' ]]; then
+
+	if ! which brew > /dev/null ; then
+		echo 'Cannot find brew, exiting.'
+		
+		exit 1
+	fi
+
+	# On OS X, brew doesn't want to use sudo
+	if ! brew install openssl; then
+		echo 'Cannot install openssl, exiting.'
+		
+		exit 1
+	fi
+
+	if ! brew install ansible; then
+		echo 'Cannot install ansible, exiting.'
+
+		exit 1
+	fi
+
+fi
 
 # We might be running this locally from a version of the git repo, in that case,
 # just run it, no need to clone anything
