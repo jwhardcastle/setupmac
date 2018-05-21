@@ -108,6 +108,7 @@ prompt_svn() {
 
 build_prompt() {
     RETVAL=$?
+    PROMPT='%{%f%b%k%}'
     prompt_status
     prompt_context
     prompt_dir
