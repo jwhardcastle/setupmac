@@ -1,9 +1,9 @@
-- name: determine if {{ item.name }} is installed
+- name: "determine if {{ item.name }} is installed"
   stat:
     path: "{{ dest }}"
   register: var_inst
 
-- name: install {{ name }}
+- name: "install {{ item.name }}"
   become: true
   apt:
     deb: "{{ deb }}"

@@ -12,11 +12,11 @@
 
 
 # Install ubuntu deb files
-- name: install deb applications
-  include: "filename.yml deb={{item.deb}} name={{item.name}} dest={{item.dest}}"
-  with_dict: "{{ debs }}"
-  loop_control:
-    label: "{{ item.name }}"
+#- name: install deb applications
+#  include: "_deb.yml deb={{item.value.deb}} name={{item.value.name}} dest={{item.value.dest}}"
+#  with_dict: "{{ debs }}"
+#  loop_control:
+#    label: "{{ item.value.name }}"
 
 # Install OS X apps
 - name: install homebrew applications

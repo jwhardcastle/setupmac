@@ -3,5 +3,5 @@
   package:
     name: "{{ item }}"
     state: latest
-  with_items: "{{ applications }}"
+  with_items: "{{ apt_applications }}"
 

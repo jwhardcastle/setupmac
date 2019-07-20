@@ -6,5 +6,5 @@ filetype plugin indent on
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'chase/vim-ansible-yaml'
+Plug 'pearofducks/ansible-vim'
 call plug#end()
